@@ -1,5 +1,5 @@
 # Spring REST Lab Template
-Третяк А.В. ЦК-32мп
+Л2 Третяк А.В. ЦК-32мп
 
 ## Sample requests
 ### Controller
