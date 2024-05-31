@@ -1,4 +1,4 @@
-package ua.kpi.its.lab.rest.controller
+/*package ua.kpi.its.lab.rest.controller
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -10,3 +10,4 @@ class ExampleController {
     fun example(): ExampleDto = ExampleDto("example")
 }
 // Your code here
+*/

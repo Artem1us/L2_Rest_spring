@@ -10,7 +10,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.springframework.web.servlet.function.RouterFunction
 import org.springframework.web.servlet.function.router
-import ua.kpi.its.lab.rest.dto.ExampleDto
+import ua.kpi.its.lab.rest.handler.MagazineHandler
+import ua.kpi.its.lab.rest.handler.ScientificArticleHandler
 import java.text.SimpleDateFormat
 
 @Configuration
@@ -23,19 +24,29 @@ class WebConfig : WebMvcConfigurer {
             .dateFormat(SimpleDateFormat("yyyy-MM-dd"))
             .modulesToInstall(KotlinModule.Builder().build())
 
-        converters
-            .add(MappingJackson2HttpMessageConverter(builder.build()))
+        converters.add(MappingJackson2HttpMessageConverter(builder.build()))
     }
 
     @Bean
-    fun functionalRoutes(): RouterFunction<*> = router {
+    fun functionalRoutes(
+        magazineHandler: MagazineHandler,
+        articleHandler: ScientificArticleHandler
+    ): RouterFunction<*> = router {
         "/fn".nest {
-            "/example".nest {
-                GET("") {
-                    ok().body(ExampleDto("example"))
-                }
+            "/magazines".nest {
+                POST("", magazineHandler::createMagazineHandler)
+                GET("/{id}", magazineHandler::getMagazineByIdHandler)
+                PUT("/{id}", magazineHandler::updateMagazineHandler)
+                DELETE("/{id}", magazineHandler::deleteMagazineHandler)
+                GET("", magazineHandler::getAllMagazinesHandler)
             }
-
+            "/articles".nest {
+                POST("", articleHandler::createArticleHandler)
+                GET("/{id}", articleHandler::getArticleByIdHandler)
+                PUT("/{id}", articleHandler::updateArticleHandler)
+                DELETE("/{id}", articleHandler::deleteArticleHandler)
+                GET("", articleHandler::getAllArticlesHandler)
+            }
         }
     }
 }
