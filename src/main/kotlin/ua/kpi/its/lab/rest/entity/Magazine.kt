@@ -29,7 +29,7 @@ data class Magazine(
     }
 
     override fun toString(): String {
-        return "Magazine(id=$id, name='$name', developer='$topic', version='$language', releaseDate='$establishDate', size=$issn, bitness='$price', crossPlatform=$periodicity)"
+        return "Magazine(id=$id, name='$name', topic='$topic', language='$language', establishDate='$establishDate', issn=$issn, price='$price', periodicity=$periodicity)"
     }
 
     override fun hashCode(): Int {
